@@ -23,9 +23,9 @@ MENU_TITLE_3=[3] 자료실
 
 #########################################################
 #menu가 선택되었을 때 로드할 shared object 의 이름을 관리하는 부분 
-MENU_TITLE_SO_1=/home/mobis/pumpkin_market/final_code/src/server/libboard.so
-MENU_TITLE_SO_2=/home/mobis/pumpkin_market/final_code/src/server/libsub.so
-MENU_TITLE_SO_3=/home/mobis/pumpkin_market/final_code/src/server/libadd.so
+MENU_TITLE_SO_1=/home/mobis/kdh_final/kdh/final_project/src/server/libboard.so
+MENU_TITLE_SO_2=/home/mobis/kdh_final/kdh/final_project/src/server/libsub.so
+MENU_TITLE_SO_3=/home/mobis/kdh_final/kdh/final_project/src/server/libadd.so
 
 #########################################################
 #menu가 선택되었을 때 실제로 동작할 함수명을 관리한다 
