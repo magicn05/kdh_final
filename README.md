@@ -53,7 +53,7 @@
          서버 -> 클라이언트 파일 전송 (~/Public/Server/ 파일을, ~/Public/Client/ 폴더로..)
          클라이언트 -> 서버 파일 전송 (~/Public/Client / 파일을, ~/Public/Server/ 폴더로..)
       
-      6. 채팅방은 전체 채팅방 한개만 있다.
+      6. 채팅방은 전체 채팅방 한개만 있다. (여러사람들이 한번에 들어와서 다같이 채팅하는 방)
       
       7. ~/kdh_project/final_project/bin 폴더 아래에 board_contents.txt 와 userinfo.txt 는
          boost serialization 을 사용한 게시판 히스토리와 유저 정보 파일이다.
