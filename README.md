@@ -14,15 +14,16 @@
          - 해당 폴더로 들어간후 ./bootstrap.sh 명령어 실행
          - 같은 위치에서 sudo ./b2 install 명령어 실행
          
-      2. 저장된 소스를 로컬에 clone 한다. (ssh주소 : git@github.com:magicn05/kdh_final.git)
+      2. git clone을 이용해서 코드를 로컬컴퓨터에 clone 한다. (ssh주소 : git@github.com:magicn05/kdh_final.git)
       
       3. 공유라이브러리 세팅을 위해 ~/.bashrc 파일의 제일 마지막줄에 아래 명령어를 추가해준다.
          export LD_LIBRARY_PATH=~/kdh_final/final_project/lib:$LD_LIBRARY_PATH
       
       3. 프로그램에 내장된 자료실 기능을 사용하기 위해서, (안할꺼면 step 4로 건너뛰자)
          ~/Public/ 폴더 아래에 Server 와 Client 폴더를 각각 만들어준다. (※ 대소문자 주의)
-         Server 폴더에는 Server 에서 관리될 파일을 저장해준다.
-         Client 폴더에는 Client 에서 관린될 파일을 저장해준다.
+          (~/Public/Client/ 와 ~/Public/Server/)
+         ~/Public/Server 폴더에는 Server 에서 관리될 파일을 저장해준다.
+         ~/Public/Client 폴더에는 Client 에서 관린될 파일을 저장해준다.
          
       4. clone 된 폴더에 들어간다. (~/kdh_final/final_project/)
       
@@ -30,7 +31,7 @@
       
       6. make 명령어로 실행파일을 만들어준다. (파일명 : server, client)
       
-      7. 실행파일은 ~/kdh_final/final_project/bin/ 폴더안에 생성이 된다.
+      7. 실행파일은 ~/kdh_final/final_project/bin/ 폴더안에 server용 과 client용 모두 생성이 된다.
       
       8. ~/kdh_final/final_project/bin/ 폴더로 들어가서 ./server 명령어로 서버 프로그램을 실행한다.
       
@@ -57,7 +58,7 @@
       
       7. ~/kdh_project/final_project/bin 폴더 아래에 board_contents.txt 와 userinfo.txt 는
          boost serialization 을 사용한 게시판 히스토리와 유저 정보 파일이다.
-         지우면 프로그램 자체가 실행이 안되니 주의 할 것!
+         ☞ txt 파일이 없으면 lboost 라이브러리 에러가 나면서 프로그램 자체가 실행이 안되니 주의 할 것!!!!!
       
 ## 5. 참고자료
 
