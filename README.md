@@ -19,23 +19,23 @@
       3. 공유라이브러리 세팅을 위해 ~/.bashrc 파일의 제일 마지막줄에 아래 명령어를 추가해준다.
          export LD_LIBRARY_PATH=~/kdh_final/final_project/lib:$LD_LIBRARY_PATH
       
-      3. 프로그램에 내장된 자료실 기능을 사용하기 위해서, (안할꺼면 step 4로 건너뛰자)
+      4. 프로그램에 내장된 자료실 기능을 사용하기 위해서, (안할꺼면 step 4로 건너뛰자)
          ~/Public/ 폴더 아래에 Server 와 Client 폴더를 각각 만들어준다. (※ 대소문자 주의)
           (~/Public/Client/ 와 ~/Public/Server/)
          ~/Public/Server 폴더에는 Server 에서 관리될 파일을 저장해준다.
          ~/Public/Client 폴더에는 Client 에서 관린될 파일을 저장해준다.
          
-      4. clone 된 폴더에 들어간다. (~/kdh_final/final_project/)
+      5. clone 된 폴더에 들어간다. (~/kdh_final/final_project/)
       
-      5. make clean 명령어로 혹시나 불필요한 파일이 있을수도 있으니 초기화 + 제거를 해준다.
+      6. make clean 명령어로 혹시나 불필요한 파일이 있을수도 있으니 초기화 + 제거를 해준다.
       
-      6. make 명령어로 실행파일을 만들어준다. (파일명 : server, client)
+      7. make 명령어로 실행파일을 만들어준다. (파일명 : server, client)
       
-      7. 실행파일은 ~/kdh_final/final_project/bin/ 폴더안에 server용 과 client용 모두 생성이 된다.
+      8. 실행파일은 ~/kdh_final/final_project/bin/ 폴더안에 server용 과 client용 모두 생성이 된다.
       
-      8. ~/kdh_final/final_project/bin/ 폴더로 들어가서 ./server 명령어로 서버 프로그램을 실행한다.
+      9. ~/kdh_final/final_project/bin/ 폴더로 들어가서 ./server 명령어로 서버 프로그램을 실행한다.
       
-      9. 8번과 같은 폴더내에서 ./client 127.0.0.1 명령어로 클라이언트 프로그램을 실행한다.
+      10. 8번과 같은 폴더내에서 ./client 127.0.0.1 명령어로 클라이언트 프로그램을 실행한다.
       
 ## 4. 프로젝트 사용 방법
       1. 클라이언트
