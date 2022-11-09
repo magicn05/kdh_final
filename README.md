@@ -1,5 +1,5 @@
 ## 1. 프로젝트명
-      어렵게 만든 그냥 게시판
+      어렵게 만든 게.시.판.
 
 ## 2. 프로젝트 설명
       TCP/IP 를 이용한 게시판-자료실-채팅방 올인원 프로그램 (C++, C를 곁들인)
@@ -14,7 +14,7 @@
          - 해당 폴더로 들어간후 ./bootstrap.sh 명령어 실행
          - 같은 위치에서 sudo ./b2 install 명령어 실행
          
-      2. git clone을 이용해서 코드를 로컬컴퓨터에 clone 한다. (ssh주소 : git@github.com:magicn05/kdh_final.git)
+      2. git clone을 이용해서 소스코드를 로컬컴퓨터에 clone 한다. (ssh주소 : git@github.com:magicn05/kdh_final.git)
       
       3. 공유라이브러리 세팅을 위해 ~/.bashrc 파일의 제일 마지막줄에 아래 명령어를 추가해준다.
          export LD_LIBRARY_PATH=~/kdh_final/final_project/lib:$LD_LIBRARY_PATH
