@@ -7,6 +7,7 @@
 
 ## 3. 프로젝트 설치 및 실행방법
       1. boost 라이브러리를 설치한다. (설치했으면 step 2번으로 건너뛰자)
+         - 클래스 자료의 serialization 을 위한 목적임.
          - https://www.boost.org/users/download/ 에서 최신 압축파일 받기 (파일명 : boost_1_80_0.tar.gz)
          - ~에 압축파일 저장후 압축 해제 (tar -xvf boost_1_80_0.tar.gz)- 
          - 리눅스에서 sudo apt-get update 명령어 실행
@@ -48,10 +49,16 @@
       
       4. 게시판 내에 글,댓글 삭제는 작성자 본인만 할수 있다.
       
-      5. 자료실 사용은 
+      5. 자료실로 파일을 전송하는 개념은 두가지 이다.
+         서버 -> 클라이언트 파일 전송 (~/Public/Server/ 파일을, ~/Public/Client/ 폴더로..)
+         클라이언트 -> 서버 파일 전송 (~/Public/Client / 파일을, ~/Public/Server/ 폴더로..)
+      
+      6. 채팅방은 전체 채팅방 한개만 있다.
+      
+      7. ~/kdh_project/final_project/bin 폴더 아래에 board_contents.txt 와 userinfo.txt 는
+         boost serialization 을 사용한 게시판 히스토리와 유저 정보 파일이다.
+         지우면 프로그램 자체가 실행이 안되니 주의 할 것!
       
 ## 5. 참고자료
-      없음. 
-      
-      코드 내용 반박시 니말이 맞음.
+
 
