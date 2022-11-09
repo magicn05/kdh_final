@@ -1,7 +1,7 @@
 INC = ../../include
 CXX = g++
 CXXFLAGS = -fPIC -c  -g
-LDFLAGS = -L /home/mobis/final_final_2/final_project/lib -lboard -lmanager -ldownload   -ldl -lpthread -lboost_serialization
+LDFLAGS = -L /home/mobis/kdh_final/final_project/lib -lboard -lmanager -ldownload   -ldl -lpthread -lboost_serialization
 #LDFLAGS = -L../../lib -lboard -lmanager -ldownload   -ldl -lpthread -lboost_serialization
 
 

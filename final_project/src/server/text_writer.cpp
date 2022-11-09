@@ -20,38 +20,52 @@ int text_writer(int sd, data_Manager & d_manager, user& now_user){
 	ct = time(NULL);
 	tm = *localtime(&ct);
 	sprintf(buf_date,"%04d-%02d-%02d %02d:%02d", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday,tm.tm_hour, tm.tm_min); //2022-11-05
-  
+  int end_flag = 0;
   buf_date_str = buf_date;
-   
   char recv_buf[1024];
   char buf[1024];
   int n;
   string my_title;
   string my_contents;
    
-    sprintf(buf, "%s", " └ 글 제목을 입력하세요. (최대 80자) >> ");
-    send(sd, buf, strlen(buf), 0);
-    n = recv(sd, recv_buf, sizeof(recv_buf), 0);
-    my_title = recv_buf;
-    memset(recv_buf,0,sizeof(recv_buf));
-    sprintf(buf, "%s", " └ 글 내용을 입력하세요.(최대 500자) >> ");
-    send(sd, buf, strlen(buf), 0);
-    sprintf(buf, "%s", ">> ");
-    send(sd, buf, strlen(buf), 0);
-    usleep(0.5);
-    n = recv(sd, recv_buf, sizeof(recv_buf), 0);
-    my_contents = recv_buf;
-    memset(recv_buf,0,sizeof(recv_buf));
+    
+      
+      A:
+      sprintf(buf, "%s", " └ 글 제목을 입력하세요. (최대 80자) >> ");
+      send(sd, buf, strlen(buf), 0);
+      n = recv(sd, recv_buf, sizeof(recv_buf), 0);
+      if (n >= 80)
+        {sprintf(buf, "%s", " Error :: 80자 미만으로 입력하세요. \n");
+          send(sd, buf, strlen(buf), 0);
+        goto A;}
+      my_title = recv_buf;
+      memset(recv_buf,0,sizeof(recv_buf));
+      
+      B:
+      sprintf(buf, "%s", " └ 글 내용을 입력하세요.(최대 500자) >> \n");
+      send(sd, buf, strlen(buf), 0);
+      sprintf(buf, "%s", ">> ");
+      send(sd, buf, strlen(buf), 0);
+      usleep(0.5);
+      n = recv(sd, recv_buf, sizeof(recv_buf), 0);
+      if (n >= 500)
+         {sprintf(buf, "%s", " Error :: 500자 미만으로 입력하세요. ");
+          send(sd, buf, strlen(buf), 0);
+          goto B;}
+      
+      my_contents = recv_buf;
+      memset(recv_buf,0,sizeof(recv_buf));
 
-    sprintf(buf, "%s", " └ 글을 게시하시겠습니까? [Y/n] ");
-    send(sd, buf, strlen(buf), 0);
-    n = recv(sd, recv_buf, sizeof(recv_buf), 0);
-    string temp;
-    temp = recv_buf;
-    if (temp == "Y"){
-    d_manager.add_data(new data(my_title, buf_date_str, now_user.get_userid(), now_user.get_userpin(), my_contents, d_manager.get_data_no()));
-    }
+      sprintf(buf, "%s", " └ 글을 게시하시겠습니까? [Y/n] ");
+      send(sd, buf, strlen(buf), 0);
+      n = recv(sd, recv_buf, sizeof(recv_buf), 0);
+      string temp;
+      temp = recv_buf;
+      if (temp == "Y"){
+      d_manager.add_data(new data(my_title, buf_date_str, now_user.get_userid(), now_user.get_userpin(), my_contents, d_manager.get_data_no()));
+      }
 
+    
   
 
   return 0;

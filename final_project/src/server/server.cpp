@@ -169,6 +169,8 @@ void thread_function(int sd) {
               }
             }
             client_no.erase(client_no.begin() + remove_sd);
+            chat_msg.clear();
+            memset(recv_buf,0,sizeof(recv_buf));
             //채팅방에서 나가면 나갔다고 전달하고, client vector에서 제거.
             pthread_mutex_unlock(&mutx);
             break;

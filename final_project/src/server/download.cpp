@@ -270,33 +270,46 @@ int download(int sd, data_Manager &d_manager, file_Manager &f_manager, int &f_no
       sprintf(buf, "%s", " └ 몇번 파일을 업로드 하시겠습니까? >> ");
       send(sd, buf, strlen(buf), 0);
       memset(recv_buf,0,sizeof(recv_buf));
+      string f_name_temp = temp;
       n = recv(sd, recv_buf, sizeof(recv_buf),0); /// upload flag에 getline
       cout << "check p2" << endl;
-      cout << "recv : " << recv_buf << endl; //file name 
-      temp = recv_buf; // temp 에 파일이름이 임시저장
-      string f_name_temp = temp;
+      cout << "recv : " << recv_buf << endl; //file name  //여기 recv_buf가 원본 파일이름..
+      temp = recv_buf;
+      f_name_temp = recv_buf; // temp 에 파일이름이 임시저장
+      f_name_temp = "/home/mobis/Public/Client/" + f_name_temp;
+      
+
+      ifstream fsrc(f_name_temp, ios::in | ios::binary | ios::ate);
+      int f_size = fsrc.tellg();
+      fsrc.read(recv_buf, f_size);
+
       strcpy(printbuf, temp.c_str());
       // file_add = "/home/mobis/Public/Client/";
       temp = addr + "cp_" + temp;
       ofstream fdest(temp, ios::out | ios::binary); //temp 파일을 연다.
 
-      memset(recv_buf, 0, sizeof(recv_buf));
+      memset(recv_buf, 0, MAX_DATA_SIZE);
       cout << " New " << endl;
-      n = read(sd, recv_buf, MAX_DATA_SIZE); //클라이언트에서 데이터를 받음.
-      cout << "n : " << n << endl;
-      fdest.write(recv_buf, n);
+      //n = read(sd, recv_buf, MAX_DATA_SIZE); //클라이언트에서 데이터를 받음.
+      
+      cout << "recv :buf " << recv_buf << endl;
+      cout << "n : " << n << endl; // 클라이언트에서 받은 데이터를 출력
+      fdest.write(recv_buf, f_size);
       fdest.close();
-
-      temp.clear();
+      fsrc.close();
+      
       memset(recv_buf, 0, sizeof(recv_buf));
       memset(buf, 0, sizeof(buf));
+      strcpy(printbuf, temp.c_str());
       sprintf(buf, " %s%s", printbuf, "을 서버자료실에 업로드 완료하였습니다. \n");
       send(sd, buf, strlen(buf), 0);
-      f_name_temp = "cp_" + f_name_temp;
-      strcpy(printbuf, f_name_temp.c_str());
-      sprintf(buf, " %s%s\n\n", "▶ 새로운 파일 이름 : ", printbuf);
-      send(sd, buf, strlen(buf), 0);
-      sleep(8);
+      //f_name_temp = "cp_" + f_name_temp;
+      // strcpy(printbuf, f_name_temp.c_str());
+      // sprintf(buf, " %s%s\n\n", "▶ 새로운 파일 이름 : ", printbuf);
+      // send(sd, buf, strlen(buf), 0);
+      f_name_temp.clear();
+      temp.clear();
+      sleep(3);
       }
     } 
     break;

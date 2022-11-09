@@ -328,31 +328,35 @@ void *send_thread(void *arg) {
     }
     else if(upload_flag == 1){ //클라이언트 폴더에서 서버로 전송.
       
-      getline(cin, s);    // <--- 여기서 멈춰있네
+      getline(cin, s);    // <--- 여기서 멈춰있네?
       select = stoi(s);
       select = select - 1;
       temp = f_manager.get_file_title(select);
+
+      //temp = "/home/mobis/Public/Client/" + temp;
       strcpy(send_msg,temp.c_str());
+
       send(new_fd, send_msg, sizeof(send_msg), 0);
-//      sleep(1);
-      file_add = "/home/mobis/Public/Client/";
-      file_add = file_add + temp;
-      cout << "check point 1" << endl;
-      ifstream fsrc(file_add, ios::in | ios::binary | ios::ate);
-      int f_size = fsrc.tellg();
-      cout << "f_size : " << f_size << endl;
-  //    sleep(10);
-      if (!fsrc) {
-        cout << "open error" << endl;
-        exit(1);
-      }
-      memset(send_msg, 0, sizeof(send_msg));
-      cout << "check point 2" << endl;
-      fsrc.read(send_msg, f_size);
-      n = send(new_fd, send_msg, f_size, 0);
-      cout << "send data : " << n << endl;
-      sleep(4);
-      fsrc.close();
+
+      // file_add = "/home/mobis/Public/Client/";
+      // file_add = file_add + temp;
+      // cout << "check point 1" << endl;
+      //ifstream fsrc(file_add, ios::in | ios::binary | ios::ate);
+      
+      //int f_size = fsrc.tellg(); //파일을 읽어서 사이즈를 확인함.
+      // cout << "f_size : " << f_size << endl;
+
+      // if (!fsrc) {
+      //   cout << "open error" << endl;
+      //   exit(1);
+      // }
+      // memset(send_msg, 0, sizeof(send_msg));
+      // cout << "check point 2" << endl;
+      // fsrc.read(send_msg, f_size);
+      // n = send(new_fd, send_msg, f_size, 0); // 서버로 데이터를 보냄.
+      // cout << "send data : " << n << endl; //보낸 데이터 용량 (바이트)
+      //sleep(4);
+      //fsrc.close();
       usleep(0.5);
       temp.clear();
       memset(buf, 0, sizeof(buf));

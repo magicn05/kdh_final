@@ -31,14 +31,12 @@ int text_reader(int sd, int selection, data_Manager &d_manager, data* temp_data,
   string temp, reply_temp;
   char buf[1024];
   char recv_buf[1024];
-  int a;
+  int a,n,no;
   int end_flag = 0;
   sprintf(buf, "%s", "WINDOW");
   send(sd, buf, strlen(buf), 0);
   usleep(0.5);
-  cout << "selection : " << selection << endl;
-  int n;
-  int no ;
+  
   for(int i=0; i<d_manager.get_data_cnt(); i++){
     if ((d_manager.get_data_postno(i)) == selection){
       no = i;
@@ -67,11 +65,7 @@ int text_reader(int sd, int selection, data_Manager &d_manager, data* temp_data,
     strcpy(buf, temp.c_str());
     send(sd, buf, strlen(buf), 0);
     memset(buf, 0, sizeof(buf));
-    // sprintf(buf, "%s",
-    //         "=================================================================="
-    //         "===============\n");
-    // 
-    // send(sd, buf, strlen(buf), 0);
+
     temp.clear();
     sprintf(buf, "%s",
             "Written by : "); /////////////////////////// Written by
@@ -112,7 +106,7 @@ int text_reader(int sd, int selection, data_Manager &d_manager, data* temp_data,
             " [No.]     [COMMENT]                               [WRITER]       [DATE]      \n");
     send(sd, buf, strlen(buf), 0);
 
-    //cout << "temp_data cnt : " << temp_data->reply_list.size() << endl;
+    sleep(1);
 
     for (int m=0; m<temp_data->reply_list.size(); m++){
       strcpy(printbuf1,temp_data->get_reply_title(m).c_str());
@@ -127,8 +121,10 @@ int text_reader(int sd, int selection, data_Manager &d_manager, data* temp_data,
             "===============\n\n");
     send(sd, buf, strlen(buf), 0);
     usleep(0.5);
-    // sprintf(buf, "%s", " []. 추천하기\n");
-    // send(sd, buf, strlen(buf), 0);
+    
+    sprintf(buf, "%s", " [0]. 새로고침\n");
+    send(sd, buf, strlen(buf), 0);
+
     sprintf(buf, "%s", " [1]. 댓글달기\n");
     send(sd, buf, strlen(buf), 0);
     sprintf(buf, "%s", " [2]. 댓글삭제\n");
@@ -142,27 +138,28 @@ int text_reader(int sd, int selection, data_Manager &d_manager, data* temp_data,
     sleep(1);
     n = recv(sd, recv_buf, sizeof(recv_buf), 0);
     a = atoi(recv_buf);
-    switch (a) {
-    case 0: //추천하기
-      sprintf(buf, "%s", " 추천하였습니다.");
-      send(sd, buf, strlen(buf), 0);
-      sleep(2);
-      sprintf(buf, "%s", "WINDOW");
-      send(sd, buf, strlen(buf), 0);
-      usleep(0.5);
-      break;
 
+    switch (a) {
+    case 0: // 새로고침
+      break;
     case 1: //댓글 작성
+      A:
       temp.clear();
-      sprintf(buf, "%s", " └ 댓글을 입력하세요 >> ");
+      sprintf(buf, "%s", " └ 댓글을 입력하세요 (최대 80자) >> ");
       send(sd, buf, strlen(buf), 0);
       memset(recv_buf,0,sizeof(recv_buf));
       n = recv(sd, recv_buf, sizeof(recv_buf), 0);
+       if (n >= 80)
+        {sprintf(buf, "%s", " Error :: 80자 미만으로 입력하세요. \n");
+          send(sd, buf, strlen(buf), 0);
+        goto A;}
+
       temp = recv_buf;
       d_manager.data_list[no]->add_reply(new reply(temp, now_user.get_userid(), buf_date_str));
       temp.clear();
       usleep(0.5);
-      break;
+    break;
+    
     case 2: //댓글 삭제
       temp.clear();
       sprintf(buf, "%s", " └ 삭제하실 댓글 번호를 입력하세요 >> ");
@@ -175,7 +172,8 @@ int text_reader(int sd, int selection, data_Manager &d_manager, data* temp_data,
       usleep(0.5);
       memset(recv_buf,0,sizeof(recv_buf));
       n = recv(sd, recv_buf, sizeof(recv_buf), 0);
-      if(strcmp(recv_buf,"Y")==0){
+      if(strcmp(recv_buf,"Y")==0)
+      {
         if(now_user.get_userid() == d_manager.data_list[no]->reply_list[a]->get_rp_writer())
           {
             //v.erase(v.begin() + i);
@@ -189,18 +187,24 @@ int text_reader(int sd, int selection, data_Manager &d_manager, data* temp_data,
           break;
         }
       }
-      else{
+      else
+      {
         sprintf(buf, "%s", " Error :: 댓글 삭제를 취소합니다. ");
         send(sd, buf, strlen(buf), 0);
         sleep(3);
       }
       break;
+ 
     case 3: // 돌아가기
       end_flag = 1;
       sprintf(buf, "%s", "WINDOW");
       send(sd, buf, strlen(buf), 0);
       usleep(0.5);
+    break;
+
+    default:
       break;
+
     }
   }
 
